@@ -1,0 +1,15 @@
+node_modules
+bower_components
+app/dist
+app/test/coverage
+*.log
+.tmp
+wireframes/*.ai
+wireframes/*.psd
+app/server/secrets.py
+*.pyc
+*.Python
+bin/
+lib/
+include/
+app/client/scripts/libraries/Wix.js
