@@ -1,0 +1,112 @@
+<!doctype html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wix Facebook Calendar App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.31.0/js/Wix.js"></script>
+    
+    <!-- build:css styles/desktop.css -->
+    <link rel="stylesheet" href="client/bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="client/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="client/styles/calendar.css">
+    <link rel="stylesheet" href="client/styles/desktop.css">
+    <!-- endbuild -->
+    <style wix-style>
+        .app {
+          border-color: {{style.border color-5}};
+          background-color: {{style.background color-1}};
+        }
+        .header {
+          border-color: {{style.border color-5}};
+        }
+        .title {
+          color: {{style.titleColor color-14}};
+          {{style.titleFont Heading-L}}
+        }
+        .current-view {
+          color: {{style.secondaryColor color-14}};
+          {{style.secondaryFont Heading-M}}
+        }
+        .description {
+          color: {{style.tertiaryColor color-14}};
+          {{style.tertiaryFont Body-M}}
+        }
+        #calendar {
+          color: {{style.tertiaryColor color-10}};
+          {{style.tertiaryFont Body-M}}
+        }
+        .direction {
+          color: {{style.buttonColor color-1}};
+          {{style.buttonFont Body-M}}
+          background-color: {{style.outerButtons color-5}} !important;
+        }
+        .direction:focus {
+          color: {{style.buttonColor color-1}};
+        }
+        .direction:hover {
+          color: {{style.buttonColor color-1}};
+        }
+        .today {
+          background-color: {{style.background color-1}} !important;
+          {{style.buttonFont Body-M}}
+          color: {{style.tertiaryColor color-14}};
+        }
+        .today:focus {
+          color: {{style.tertiaryColor color-14}};
+        }
+        .event-details {
+          color: {{style.secondaryColor color-17}};
+          {{style.secondaryFont Body-M}}
+        }
+        .event-details:hover {
+          color: {{style.secondaryColor color-17}};
+        }
+        .clear {
+          border-color: {{style.border color-5}};
+        }
+    </style>
+  </head>
+  <body ng-app="fbCal" style="background-color: transparent">
+    <!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- build:js scripts/compat.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- Add your site or application content here -->
+    <div ng-include="'client/views/index.html'"></div>
+
+    <!-- build:js scripts/plugins.js -->
+    <script src="client/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="client/bower_components/angular/angular.min.js"></script>
+    <script src="client/bower_components/underscore/underscore-min.js"></script>
+    <script src="client/bower_components/bootstrap/js/tooltip.js"></script>
+    <script src="client/scripts/libraries/calendar.js"></script>
+    <script src="client/bower_components/moment/min/moment.min.js"></script>
+    <script src="client/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="client/bower_components/angular-animate/angular-animate.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/index.js -->
+    <script src="client/scripts/app.js"></script>
+    <script src="client/scripts/services/api.js"></script>
+    <script src="client/scripts/services/server.js"></script>
+    <script src="client/scripts/services/wix.js"></script>
+    <script src="client/scripts/services/desktopCalendar.js"></script>
+    <script src="client/scripts/services/list.js"></script>
+    <script src="client/scripts/controllers/desktop.js"></script>
+    <script src="client/scripts/directives/borderWidth.js"></script>
+    <script src="client/scripts/directives/corners.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

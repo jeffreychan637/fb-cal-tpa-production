@@ -1,0 +1,38 @@
+<!-- This is the main HTML file for the Widget. -->
+
+<div ng-controller="DesktopCtrl" id="desktop" class="app" style="min-width: 285px" border-width corners>
+  <div id="header" class="page-header" border-width-header>
+    <h1 class="title">{{settings.title}}</h1>
+    <div>
+      <div ng-show="settings.view === 'Month'">
+        <div class="btn-group nav-btn">
+          <button class="btn btn-default direction" data-calendar-nav="prev">&lt;&lt; Prev</button>
+          <button class="btn btn-default today" data-calendar-nav="today">Today</button>
+          <button class="btn btn-default direction" data-calendar-nav="next">Next &gt;&gt;</button>
+        </div>
+        <h3 id="current-view" class="current-view"></h3>
+      </div>
+    </div>
+    <span class="description">{{settings.description}}</span>
+  </div>
+  
+  <!-- Calendar -->
+  <div ng-show="settings.view === 'Month'">
+    <div id="calendar" class="desktop-calendar"></div>
+    <!-- <ul id="eventlist" class="nav nav-list"></ul> -->
+    <!-- This is an event list that can be paired with the Calendar. It was never officially
+       integrated into the widget. But integrating would be as easy as uncommenting the line
+       of code you see above and placing the element in a good spot as well as uncommenting
+       the function in the calendar setup function (located in desktopCalendar file).
+    -->
+  </div>
+
+  <!-- List -->
+  <ul ng-if="settings.view === 'List'" class="event-list ">
+    <li ng-repeat="event in eventList" class="events">
+      <a class="event-details event-title" ng-click="openModal($index)">{{event.title}}</a>
+      <a class="event-details event-time" ng-click="openModal($index)">{{event.time}}</a>
+      <div class="clear" ng-style="listStyle($last)" border-width></div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,259 @@
+<!-- This the main HTML file for the Settings panel. -->
+
+<div ng-controller="SettingsCtrl">
+
+  <!-- Header -->
+  <header class="box">
+    <div class="logo">
+      <img width="86" src="../client/images/wix_icon.png">
+    </div>
+    <div ng-hide="loggedIn">
+      <p ng-hide="loginMessage">
+        Connect your Facebook account. This process is secure and completely private. Wix will not have access to your Facebook password.
+        <br><br>
+        Please open this app in the editor at least once every two months so this app can stay connected to your Facebook account.
+        <br><br>
+        Events on this calendar should be <strong>public</strong> or site visitors will not be able to RSVP or post through the app. The only exception is when you believe all site visitors have been invited to the event via Facebook already.
+      </p>
+      <p ng-show="loginMessage" class="error">
+        {{loginMessage}}
+      </p>
+      <div class="login-panel">
+        <p class="create-account">
+          Don't have an account?
+          <br>
+          <strong>
+            <a class="link" href="http://www.facebook.com" target="_blank">Create one</a>
+          </strong>
+        </p>
+        <button class="uilib-btn connect" ng-click="login()" ng-disabled="connectDisabled">
+          <span ng-hide="disabled">Connect account</span>
+          <span ng-show="disabled">Logging in...</span>
+        </button>
+      </div>
+    </div>
+    <div ng-show="loggedIn">
+      <p>
+        <span class="icon-check-mark-circle checkmark" data-icon="a"></span>
+        You are now connected to {{userName}}'s Facebook account.
+      </p>
+        <a class="disconnect-account" ng-click="logout(disconnectDisabled)">
+          Disconnect Account
+        </a>
+    </div>
+  </header>
+
+
+  <div wix-ctrl="Accordion">
+
+    <!-- First Accordian - Events -->
+    <div class="acc-pane">
+      <h3 class="events">
+        Events
+        <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'In the Events settings, check your Facebook events that you want to share on your calendar. If you are using month mode, you can choose the color of the dot representing each event on the calendar.'}">
+          <strong>
+            <a class="question">
+              ?
+            </a>
+          </strong>
+        </div>
+      </h3>
+      <div class="acc-content">
+        <ul class="list">
+          <li class="events-list" ng-repeat="event in allEventsList" on-finish-render="Render Finished">
+              <div id="event{{event.id}}" wix-model="event{{event.id}}" wix-ctrl="Checkbox" style=" margin-bottom: 0.75em"></div>
+              <div id="event{{event.id}}Color" wix-model="event{{event.id}}Color" wix-param="event{{event.id}}Color" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-2'}" class="spacing" style="margin-left: 0.5em; margin-right: 0.5em;"></div>
+              <span class="uilib-text event-name">{{event.name}}</span>
+          </li>
+          <li>
+            <span class="uilib-text" ng-show="allEventsList.length === 0 &amp;&amp; loggedIn">
+              No events found. Create some events on Facebook first!
+            </span>
+            <span class="uilib-text" ng-hide="loggedIn">
+              Connect to your Facebook accounts to add your events to the calendar.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Second Accordian Settings -->
+    <div class="acc-pane">
+      <h3>Settings</h3>
+      <div class="acc-content">
+        <ul class="list">
+          <li wix-label="Calendar View" class="toggle-label">
+            <div class="onoffswitch calendar-switch">
+              <input type="checkbox" name="calendarView" class="onoffswitch-checkbox" id="calendarView"ng-change="handleToggles('view')" ng-model="view" ng-checked="settings.view === 'Month'">
+              <label class="onoffswitch-label" for="calendarView">
+                <span class="onoffswitch-inner calendar-switch-inner"></span>
+                <span class="onoffswitch-switch calendar-switch-switch"></span>
+              </label>
+            </div>
+            <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'Choose between using a list or a calendar to display your upcoming events.'}">
+              <strong>
+                <a class="uilib-text toggle-question">
+                  ?
+                </a>
+              </strong>
+            </div>
+          </li>
+          <li wix-label="Commenting" class="toggle-label">
+            <div class="onoffswitch">
+              <input type="checkbox" name="commentSwitch" class="onoffswitch-checkbox" id="commentSwitch" ng-change="handleToggles('commenting')" ng-model="commenting" ng-checked="settings.commenting">
+              <label class="onoffswitch-label" for="commentSwitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+            </div>
+            <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'Turning this on means that site visitors can post to the Facebook wall of your event as well as like and comment on the statuses there through the app. Turning this off removes those capabilities but still allows users to RSVP and share your event.'}">
+              <strong>
+                <a class="uilib-text toggle-question short-toggle-question">
+                  ?
+                </a>
+              </strong>
+            </div>
+          </li>
+          <li wix-label="Show 'Hosted by'" class="toggle-label">
+            <div class="onoffswitch">
+              <input type="checkbox" name="hostedSwitch" class="onoffswitch-checkbox" id="hostedSwitch" ng-change="handleToggles('hostedBy')" ng-model="hostedBy" ng-checked="settings.hostedBy">
+              <label class="onoffswitch-label" for="hostedSwitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+            </div>
+            <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'Show visitors who is hosting this event. Remember that if you are hosting this event from your personal account, you are sharing your Facebook profile with all your visitors.'}">
+              <strong>
+                <a class="uilib-text toggle-question short-toggle-question">
+                  ?
+                </a>
+              </strong>
+            </div>
+          </li>
+          <li wix-label="Title">
+            <div wix-model="title" wix-ctrl="Input" wix-options="{placeholder: 'My Calendar'}"></div>
+          </li>
+          <li wix-label="Description">
+            <div wix-model="description" wix-ctrl="Input" wix-options="{placeholder: 'These are my events.'}"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Third Accordian - Calendar Design -->
+    <div class="acc-pane">
+      <h3>Calendar Design</h3>
+      <div class="acc-content">
+        <ul class="list">
+          <li wix-label="Title Font">
+            <div wix-param="titleColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-14'}"></div>
+            <div wix-param="titleFont" wix-ctrl="FontStylePicker" wix-options="{value: 'Heading-L'}"></div>
+          </li>
+          <li wix-label="Secondary Font">
+            <div wix-param="secondaryColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-14'}"></div>
+            <div wix-param="secondaryFont" wix-ctrl="FontStylePicker" wix-options="{value: 'Body-M'}"></div>
+            <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'In month mode, this is the font of the current month shown. In list mode, this is font of the events and their times.'}">
+              <strong>
+                <a class="uilib-text question">
+                  ?
+                </a>
+              </strong>
+            </div>
+          </li>
+          <li wix-label="Tertiary Font">
+            <div wix-param="tertiaryColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-14'}"></div>
+            <div wix-param="tertiaryFont" wix-ctrl="FontStylePicker" wix-options="{value: 'Body-M'}"></div>
+            <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'This is the font of the description text. In month mode, it is also the font of the calendar. Note after refreshing that the days of the week automatically switch to abbreviations (e.g. Mon) when the widget is small enough in width.'}">
+              <strong>
+                <a class="uilib-text question">
+                  ?
+                </a>
+              </strong>
+            </div>
+          </li>
+          <li wix-label="Button Font" ng-show="settings.view === 'Month'">
+            <div wix-param="buttonColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-1'}"></div>
+            <div wix-param="buttonFont" wix-ctrl="FontStylePicker" wix-options="{value: 'Body-M'}"></div>
+            <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'The color picker only changes the fontcolor of the outer buttons. The middle button uses the tertiary font color.'}">
+              <strong>
+                <a class="uilib-text question">
+                  ?
+                </a>
+              </strong>
+            </div>
+          </li>
+          <li wix-label="Background">
+              <div wix-param="background" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-1', startWithOpacity:100}"></div>
+          </li>
+          <li wix-label="Border">
+            <div wix-param="border" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-5', startWithOpacity:100}"></div>
+          </li>
+          <li wix-label="Outer Buttons" ng-show="settings.view === 'Month'">
+            <div wix-param="outerButtons" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-5', startWithOpacity:100}"></div>
+            <div wix-ctrl="Tooltip" wix-options="{placement:'right', text:'This only changes the color of the outer buttons. The middle button uses the background color.'}">
+              <strong>
+                <a class="uilib-text question button-question">
+                  ?
+                </a>
+              </strong>
+            </div>
+          </li>
+          <li wix-label="Border Width">
+            <div  wix-model="borderWidth" wix-ctrl="Slider" wix-options="{minValue: 0, maxValue: 20, preLabel: '0', postLabel: '20', toolTip: true}">
+            </div>
+          </li>
+          <li wix-label="Corners">
+            <span class="uilib-text slider-before">Sharp</span>
+            <div  wix-model="corners" wix-ctrl="Slider" wix-options="{minValue: 0, maxValue: 30}">
+            </div>
+            <span class="uilib-text slider-after">Round</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+     <!-- Fourth Accordian - Popup Design -->
+    <div class="acc-pane">
+      <h3>Popup Design</h3>
+      <div class="acc-content">
+        <ul class="list">
+          <li wix-label="Title Font">
+            <div wix-param="modalTitleColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-14'}"></div>
+            <div wix-param="modalTitleFont" wix-ctrl="FontStylePicker" wix-options="{value: 'Heading-L'}"></div>
+          </li>
+          <li wix-label="Body Font">
+            <div wix-param="modalBodyColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-14'}"></div>
+            <div wix-param="modalBodyFont" wix-ctrl="FontStylePicker" wix-options="{value: 'Body-M'}"></div>
+          </li>
+          <li wix-label="Button Font">
+            <div wix-param="modalButtonColor" wix-ctrl="ColorPicker" wix-options="{startWithColor: 'color-14'}"></div>
+            <div wix-param="modalButtonFont" wix-ctrl="FontStylePicker" wix-options="{value: 'Body-M'}"></div>
+          </li>
+          <li wix-label="Buttons">
+            <div wix-param="modalButtons" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-2', startWithOpacity:100}"></div>
+          </li>
+          <li wix-label="Blocks">
+              <div wix-param="modalBlocks" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-2', startWithOpacity:100}"></div>
+          </li>
+          <li wix-label="Background">
+              <div wix-param="modalBackground" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-1', startWithOpacity:100}"></div>
+          </li>
+          <li wix-label="Border">
+            <div wix-param="modalBorder" wix-ctrl="ColorPickerWithOpacity" wix-options="{startWithColor: 'color-5', startWithOpacity:100}"></div>
+          </li>
+          <li wix-label="Border Width">
+            <div  wix-model="modalBorderWidth" wix-ctrl="Slider" wix-options="{minValue: 0, maxValue: 20, preLabel: '0', postLabel: '20', toolTip: true}">
+            </div>
+          </li>
+          <li wix-label="Corners">
+            <span class="uilib-text slider-before">Sharp</span>
+            <div  wix-model="modalCorners" wix-ctrl="Slider" wix-options="{minValue: 0, maxValue: 30}">
+            </div>
+            <span class="uilib-text slider-after">Round</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

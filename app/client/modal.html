@@ -1,0 +1,184 @@
+<!doctype html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wix Facebook Calendar App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.31.0/js/Wix.js"></script>
+    <!-- build:css styles/modal.css -->
+    <link rel="stylesheet" href="../../client/bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="../../client/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../client/styles/calendar.css">
+    <link rel="stylesheet" href="../../client/styles/styles.css">
+    <link rel="stylesheet" href="../../client/styles/modal.css">
+    <!-- endbuild -->
+    {% raw %}
+    <style wix-style>
+      .loading {
+        color: {{style.modalTitleColor color-14}};
+      }
+      .app {
+        border-color: {{style.modalBorder color-5}};
+        background-color: {{style.modalBackground color-1}};
+      }
+      #header {
+        border-color: {{style.modalBorder color-5}};
+        background-color: {{style.modalBlocks color-2}};
+      }
+      .heading {
+        color: {{style.modalTitleColor color-14}};
+        {{style.modalTitleFont Heading-L}};
+      }
+      .heading:hover {
+        color: {{style.modalTitleColor color-14}};
+        {{style.modalTitleFont Heading-L}};
+      }
+      .sub-heading {
+        color: {{style.modalTitleColor color-14}};
+      }
+      .sub-heading:hover {
+        color: {{style.modalTitleColor color-14}};
+      }
+      .host {
+        color: {{style.modalTitleColor color-14}};
+      }
+      .info-blocks {
+        color: {{style.modalBodyColor color-14}};
+      }
+      .info-blocks:hover {
+        color: {{style.modalBodyColor color-14}};
+      }
+      .btn {
+        color: {{style.modalButtonColor color-14}} !important;
+        {{style.modalButtonFont Body-M}};
+        background-color: {{style.modalButtons color-2}} !important;
+        border-color: {{style.modalButtonColor color-14}} !important; 
+      }
+      .dropdown-menu {
+        color: {{style.modalButtonColor color-14}} !important;
+        {{style.modalButtonFont Body-M}};
+        background-color: {{style.modalButtons color-2}} !important;
+      }
+      .dropdown-menu > li > a {
+        color: {{style.modalButtonColor color-14}} !important;
+        {{style.modalButtonFont Body-M}};
+        background-color: {{style.modalButtons color-2}} !important;
+      }
+      .block {
+        border-color: {{style.modalBorder color-5}};
+        background-color: {{style.modalBlocks color-2}};
+      }
+      #description {
+        color: {{style.modalBodyColor color-14}};
+        {{style.modalBodyFont Body-M}};
+      }
+      .form-control {
+        color: {{style.modalBodyColor color-14}};
+      }
+      .form-control:focus {
+        border-color: {{style.modalButtonColor color-14}};
+      }
+      blockquote {
+        border-left-color: {{style.modalBodyColor color-14}};
+        color: {{style.modalBodyColor color-14}};
+        {{style.modalBodyFont Body-M}};
+      }
+      .link {
+        color: {{style.modalBodyColor color-14}};
+        {{style.modalBodyFont Body-M}};
+      }
+      .link:hover {
+        color: {{style.modalBodyColor color-14}};
+        {{style.modalBodyFont Body-M}};
+      }
+      .load-feed {
+        color: {{style.modalBodyColor color-14}};
+        {{style.modalBodyFont Body-M}};
+      }
+      .load-posts {
+        color: {{style.modalBodyColor color-14}};
+        {{style.modalBodyFont Body-M}};
+      }
+      .modal-content {
+        border-color: {{style.modalBorder color-5}};
+        background-color: {{style.modalBlocks color-2}};
+      }
+      .modal-header {
+        border-bottom-color: {{style.modalBodyColor color-14}};;
+      }
+      .modal-title {
+        color: {{style.modalTitleColor color-14}};
+        {{style.modalTitleFont Heading-L}};
+      }
+      .modal-body {
+        color: {{style.modalBodyColor color-14}};
+        {{style.modalBodyFont Body-M}};
+      }
+      .modal-footer {
+        border-top-color: {{style.modalBodyColor color-14}};;
+      }
+       @media all and (max-width: 475px) {
+        .heading {
+          font-size: 36px;
+        }
+        .heading:hover {
+          font-size: 36px;
+        }
+        .modal-title {
+          font-size: 36px;
+        }
+       }
+    </style>
+    {% endraw %}
+  </head>
+  <body ng-app="fbCal">
+    <!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- build:js scripts/compat.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- Add your site or application content here -->
+    <div ng-include="'../../client/views/modal.html'"></div>
+
+    <!-- build:js scripts/plugins.js -->
+    <script src="../../client/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../client/bower_components/angular/angular.min.js"></script>
+    <script src="../../client/bower_components/bootstrap/js/modal.js"></script>
+    <script src="../../client/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../../client/bower_components/angular-animate/angular-animate.min.js"></script>
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/index.js -->
+    <script src="../../client/scripts/app.js"></script>
+    
+    <!-- This is necessary to pass event ID from server into modal, so the modal
+         knows what event to ask the server for later. -->
+    <script type="text/javascript">
+        angular.module('fbCal').value('eventId', {{event_id}});
+    </script>
+
+    <script src="../../client/scripts/services/facebook/fbSetup.js"></script>
+    <script src="../../client/scripts/services/facebook/modalFbLogin.js"></script>
+    <script src="../../client/scripts/services/facebook/fbEvents.js"></script>
+    <script src="../../client/scripts/services/api.js"></script>
+    <script src="../../client/scripts/services/messages.js"></script>
+    <script src="../../client/scripts/services/processor.js"></script>
+    <script src="../../client/scripts/services/wix.js"></script>
+    <script src="../../client/scripts/services/server.js"></script>
+    <script src="../../client/scripts/controllers/modal.js"></script>
+    <script src="../../client/scripts/directives/borderWidth.js"></script>
+    <script src="../../client/scripts/directives/corners.js"></script>
+    <!-- endbuild -->
+    <div id="fb-root"></div>
+</body>
+</html>

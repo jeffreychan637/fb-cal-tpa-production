@@ -1,0 +1,86 @@
+/**
+ * CSS File for the Settings Panel
+ *
+ * @author: Jeffrey Chan
+ */
+
+[ng-cloak].loading {
+  display: block !important;
+}
+
+.loading {
+  display: none;
+}
+
+.checkmark {
+  color: green;
+  background-image: none;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.disconnect-account {
+  position: absolute;
+  top: 96px;
+  right: 12px;
+  font-size: 12px;
+}
+
+.error {
+  color: #ff6666;
+}
+
+.question {
+  color: #09F;
+  margin-left: 1em;
+}
+
+.events-list {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border: none !important;
+}
+
+.event-name {
+  width: 80%;
+  vertical-align: baseline;
+}
+
+.non-first-events {
+  margin-top: 0.5em;
+}
+
+.toggle-label:before {
+  vertical-align: super;
+}
+
+.toggle-question {
+  vertical-align: super;
+  color: #09F;
+  margin-left: 1.5em;
+}
+
+.short-toggle-question {
+  margin-left: 2.5em;
+}
+
+input[type="text"].uilib-input {
+	width: 250px;
+}
+
+.button-question {
+  margin-left: 4em;
+  vertical-align: text-bottom;
+}
+
+.slider-before {
+  margin-right: 0.5em;
+}
+
+.slider-after {
+  margin-left: -3.5em;
+}
+
+.second-slider {
+  margin-left: 4em;
+}

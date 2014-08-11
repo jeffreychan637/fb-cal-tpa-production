@@ -1,0 +1,123 @@
+/**
+ * CSS File for the Widget
+ *
+ * @author: Jeffrey Chan
+ */
+
+.app {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.nav-btn {
+  float: right;
+}
+
+.btn:hover {
+  opacity: 0.4;
+}
+
+.btn:focus {
+  border-color: #ccc;
+}
+
+#calendar {
+  padding: 5px;
+  padding-bottom: 10px;
+}
+
+.glyphicon {
+  font-size: 14px !important;
+}
+
+.page-header {
+  margin-top: 0;
+  padding: 3px; 
+}
+
+.title {
+  margin-top: 5px;
+}
+
+.event-list {
+  text-decoration: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.event-list li {
+  display: inline;
+}
+
+.event-details {
+  float: left;
+  padding: 0.7em;
+  cursor: pointer;
+}
+
+.event-time {
+  float: right;
+}
+
+.clear {
+  clear: both;
+  border-bottom: 1px solid black;
+}
+
+@media all and (min-width: 500px) {
+  .event-title {
+    max-width: 54%;
+  }
+}
+
+
+@media all and (min-width: 600px) {
+  .event-title {
+    max-width: 61%;
+  }
+}
+
+
+@media all and (min-width: 700px) {
+  .event-title {
+    max-width: 67%;
+  }
+}
+
+
+@media all and (min-width: 800px) {
+  .event-title {
+    max-width: 71%;
+  }
+}
+
+
+@media all and (min-width: 900px) {
+  .event-title {
+    max-width: 74%;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  .event-title {
+    max-width: 77%;
+  }
+}
+
+@media all and (min-width: 1150px) {
+  .event-title {
+    max-width: 80%;
+  }
+}
+
+@media all and (min-width: 1300px) {
+  .event-title {
+    max-width: 82%;
+  }
+}
+
+@media all and (min-width: 1400px) {
+  .event-title {
+    max-width: 84%;
+  }
+}

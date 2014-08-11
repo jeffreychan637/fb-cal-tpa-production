@@ -1,0 +1,303 @@
+/**
+ * CSS File for the Modal
+ *
+ * @author: Jeffrey Chan
+ */
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+  cursor: pointer;
+}
+
+blockquote {
+  font-size: 14px;
+  padding: 5px 10px;
+  margin: 0;
+}
+
+.loading {
+  position: absolute;
+  top: 245px;
+  left: 255px;
+}
+ 
+ @media all and (max-width: 475px) {
+  .loading{
+    top: 185px;
+    left: 5px;
+  }
+ }
+
+.app {
+  border: 5px solid black;
+  padding: 20px;
+  background-color: pink;
+  color: white;
+}
+
+.page-header {
+  border: 5px solid black;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #ff4c4c;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dark-background {
+  background-color: rgba(33, 33, 33, 0.7);
+  border-radius: inherit;
+}
+
+.title {
+  margin: 20px;
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding-bottom: 4px;
+}
+
+.host {
+  margin: 20px;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.rsvp {
+  display: inline-block;
+  padding-left: 60px;
+}
+
+@media all and (max-width: 475px) {
+  .rsvp {
+    padding-left: 20px;
+  }
+}
+
+.dropdown-menu {
+  min-width: 90px;
+  left: auto;
+}
+
+.dropdown-menu > li > a {
+  color: #ff4c4c;
+}
+
+.icon {
+  font-size: 25px;
+  vertical-align: middle;
+}
+
+.block {
+  border: 5px solid black;
+  padding: 10px;
+  background-color: #ff4c4c;
+  margin-top: 10px;
+}
+
+.add-on {
+  border-top: none;
+  margin-top: 0;
+}
+
+.left-col {
+  padding-left: 0;
+  padding-right: 5px;
+}
+
+.right-col {
+  padding-left: 5px;
+  padding-right: 0;
+}
+
+.middle-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media all and (max-width: 767px) {
+  .col-sm-5 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .left-col {
+    padding-right: 0;
+  }
+  .right-col {
+    padding-left: 0;
+  }
+}
+
+.main-text {
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.sub-text {
+  margin-top: 0.25em;
+  margin-bottom: 0;
+  margin-left: 2.5em;
+}
+
+@media all and (max-width: 475px) {
+  .sub-text {
+    margin-left: 0;
+  }
+}
+
+.link {
+  color: white;
+}
+
+.link:hover {
+  color: #00A7FF;
+  cursor: pointer;
+}
+
+.friend {
+  vertical-align: baseline;
+}
+
+.event-stat {
+  position: absolute;
+  font-size: 40px;
+  top: -8px;
+}
+
+.going {
+  left: 1.52em;
+}
+
+.maybe {
+ left: 4.1em;
+}
+
+.invited {
+  left: 6.7em;
+}
+
+.stat-label {
+  padding: 2.8em;
+}
+
+@media all and (max-width: 475px) {
+  .event-stat {
+    font-size: 25px;
+    top: 0;
+  }
+  .going {
+    left: 1.9em;
+  }
+  .maybe {
+    left: 4.7em;
+  }
+  .invited {
+    left: 7.7em;
+  }
+  .stat-label {
+    padding: 1.5em;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 805px) {
+  .event-stat {
+    font-size: 30px;
+  }
+  .stat-label {
+    padding: 12px;
+  }
+}
+
+textarea {
+  resize: none;
+  overflow: auto;
+  color: black;
+}
+
+.form-control:focus {
+  border-color: #ff4c4c;
+}
+
+.post-btn {
+  min-height: 52px;
+}
+
+.btn {
+  color: #ff4c4c !important;
+  outline: none !important;
+}
+
+.load-feed {
+  margin: 0;
+}
+
+.push-left {
+  padding-left: 15px;
+}
+
+.reply {
+  margin-left: 10px;
+}
+
+
+.comment-btn {
+  min-height: 34px;
+}
+
+.load-posts {
+  margin: 0;
+  cursor: pointer;
+}
+
+.load-posts:hover {
+  text-decoration: underline;
+}
+
+.modal-body {
+  color: black;
+}
+
+.modal-btn {
+  color: black !important;
+}
+
+.modal-btn-primary {
+  color: white !important;
+}
+
+.share-link {
+  color: #2A6496;
+}
+
+.share-link:hover {
+  color: #2A6496;
+}
+
+.animate-repeat {
+  box-sizing:border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+}
