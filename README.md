@@ -1,4 +1,4 @@
-#Facebook Calendar - Wix Market Application
+#Facebook Calendar - Wix Market Application - Production Version
 
 This Wix app allows users to share public events they have created on Facebook with visitors to their website. There will be a desktop and a mobile version. 
 
