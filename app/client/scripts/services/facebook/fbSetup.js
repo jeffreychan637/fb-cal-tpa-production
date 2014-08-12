@@ -12,22 +12,6 @@ angular.module('fbCal').factory('fbSetup', function ($window, server, $rootScope
   var fbReady = false;
 
   /**
-   * Valid Hosts to save Access Token.
-   * @type {Array}
-   */
-  var validHosts = ['editor.wix.com'];
-
-  /**
-   * Checks whether the current host is valid.
-   * 
-   * @param  {String} currentHost Current Host
-   * @return {Boolean}            Whether the current host is valid.
-   */
-  var  checkValidHost = function(currentHost) {
-   return validHosts.indexOf(currentHost) > 0;
-  };
-
-  /**
    * Tells if Facebook SDK is ready to be used.
    * 
    * @return {Boolean} Represents if Facebook SDK is ready to be used
@@ -51,8 +35,7 @@ angular.module('fbCal').factory('fbSetup', function ($window, server, $rootScope
     FB.getLoginStatus(function(response) {
       fbReady = true;
       $rootScope.$apply();
-      if (response && !response.error && response.status === 'connected' &&
-          checkValidHost($window.location.hostname)) {
+      if (response && !response.error && response.status === 'connected') {
         server.saveData({access_token: response.authResponse.accessToken}, "access token");
       }
     });

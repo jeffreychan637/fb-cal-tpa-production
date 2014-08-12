@@ -92,8 +92,7 @@ def validate_put_request(request, datatype):
     """This function validates all put requests to the server.
     
     It makes sure that each request comes with a valid Wix instance and the
-    window where the request is being performed on the client side is the
-    editor.
+    instance is coming from the owner of the app.
 
     It also makes sure that, depending on the datatype being stored, all the
     needed information to perform the put request has been provided by the
@@ -105,14 +104,11 @@ def validate_put_request(request, datatype):
     """
     try:
         instance = request.headers["X-Wix-Instance"]
-        window = request.headers["URL"]
         content_type = request.headers["Content-Type"]
     except AttributeError:
         abort(STATUS["Unauthorized"], message="Request Incomplete")
     except KeyError:
         abort(STATUS["Unauthorized"], message="Missing Value")
-    if window != "editor.wix.com":
-        abort(STATUS["Forbidden"], message="Not Inside Editor")
     if content_type != "application/json;charset=UTF-8":
         abort(STATUS["Bad_Request"], message="Badly Formed Request")
     instance_json = instance_parser(instance)
@@ -151,10 +147,7 @@ def validate_put_request(request, datatype):
 def validate_get_request(request, request_from):
     """This function validates all get requests to the server.
     
-    It makes sure that each request comes with a valid Wix instance. And if the
-    client is making requests that only the settings can make, it also checks
-    the window where the request is being performed on the client side to
-    verify that it is in the editor.
+    It makes sure that each request comes with a valid Wix instance.
 
     It also makes sure that, depending on the datatype being requested, all the
     needed information to perform the get request has been provided by the
@@ -180,9 +173,6 @@ def validate_get_request(request, request_from):
                     abort(STATUS["Forbidden"], message="3Invalid Instance")
             except KeyError:
                 abort(STATUS["Forbidden"], message="4Invalid Instance")
-            window = request.headers["URL"]
-            if window != "editor.wix.com":
-                abort(STATUS["Forbidden"], message="Not Inside Editor")
         if request_from == "modal" or request_from == "modalNeedingMoreFeed":
             event_id = request.headers["event_id"]
             desired_data = request.headers["desired_data"]

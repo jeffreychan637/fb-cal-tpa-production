@@ -16,8 +16,6 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
    */
   var compId = $wix.Utils.getOrigCompId() || $wix.Utils.getCompId();
   var instance = api.getInstance();
-  var url = $window.location.hostname;
-  console.log(url);
 
   /**
    * All the URLs for communicating with the Server.
@@ -80,20 +78,6 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
   };
 
   /**
-   * Returns the appriate header based on who is requesting.
-   * 
-   * @param  {String} from   Who is making the request (Server or Widget)
-   * @return {Object}        The appropriate header
-   */
-  var getHeader = function(from) {
-    if (from === 'widget') {
-      return {'X-Wix-Instance' : instance};
-    } else {
-      return {'X-Wix-Instance' : instance, 'URL' : url};
-    }
-  };
-
-  /**
    * Returns the correct header depending on the FB api parameter provided.
    * 
    * @param  {Object} params      Contains the FB api param needed to get next
@@ -136,7 +120,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
     $http({
            method: 'GET',
            url: getURL('get', from),
-           headers: getHeader(from),
+           headers: {'X-Wix-Instance' : instance},
            timeout: 15000
           }).success(function (data, status) {
             if (status === 200) {
@@ -272,7 +256,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
     $http({
             method: 'PUT',
             url: getURL('post', dataType),
-            headers: {'X-Wix-Instance' : instance, 'URL' : url},
+            headers: {'X-Wix-Instance' : instance},
             timeout: 10000,
             data: data
           }).success(function (message, status) {
@@ -300,7 +284,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
     $http({
             method: 'PUT',
             url: logoutURL,
-            headers: {'X-Wix-Instance' : instance, 'URL' : url},
+            headers: {'X-Wix-Instance' : instance},
             timeout: 10000,
             data: {}
           }).success(function (message, status) {
