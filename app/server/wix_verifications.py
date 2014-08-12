@@ -9,9 +9,10 @@ from hashlib import sha256
 from json import loads
 
 if "HEROKU" in environ:
-    wix_keys = environ["wix_keys"]
+    wix_secret = environ["wix_secret"]
 else:
     from secrets import wix_keys
+    wix_secret = wix_keys["secret"]
 
 __author__ = "Jeffrey Chan"
 
@@ -27,7 +28,7 @@ def instance_parser(instance):
         encoded_json_with_padding = encoded_json + ('=' * (4 - (len(encoded_json) % 4)))
         parsed_instance = urlsafe_b64decode(
                           encoded_json_with_padding.encode("utf-8"))
-        hmac_hashed = new(wix_keys["secret"], msg=encoded_json,
+        hmac_hashed = new(wix_secret, msg=encoded_json,
                        digestmod=sha256).digest()
         new_signature = urlsafe_b64encode(hmac_hashed).replace("=", "")
         if (new_signature == signature):

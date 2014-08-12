@@ -8,9 +8,14 @@ import facebook
 from models import get_settings
 
 if "HEROKU" in environ:
-  fb_keys = environ["fb_keys"]
+  fb_app = environ["fb_app"]
+  fb_secret = environ["fb_secret"]
+  fb_app_access_token = environ["fb_app_access_token"]
 else:
   from secrets import fb_keys
+  fb_app = fb_keys["app"]
+  fb_secret = fb_keys["secret"]
+  fb_app_access_token = fb_keys["app_access_token"]
 
 __author__ = "Jeffrey Chan"
 
@@ -30,19 +35,18 @@ def get_long_term_token(short_token, compID, instance):
     before updating the database entry.  
     """
     try:
-        graph = facebook.GraphAPI(fb_keys["app_access_token"])
+        graph = facebook.GraphAPI(fb_app_access_token)
         verify = graph.get_object("/debug_token", input_token = short_token, \
-                                  access_token = fb_keys["app_access_token"])
+                                  access_token = fb_app_access_token)
         verify_data = verify['data']
-        if (verify_data["is_valid"] and (verify_data["app_id"] == fb_keys["app"])):
+        if (verify_data["is_valid"] and (verify_data["app_id"] == fb_app)):
             user = get_settings(compID, instance)
             if user and user.access_token_data:
                 access_token_data = loads(user.access_token_data)
                 if not access_token_data["user_id"] == verify_data["user_id"]:
                   return "Invalid Access Token"
             graph = facebook.GraphAPI(short_token)
-            long_token = graph.extend_access_token(fb_keys["app"], \
-                                             fb_keys["secret"])
+            long_token = graph.extend_access_token(fb_app, fb_secret)
             long_token["generated_time"] = str(int(time()))
             long_token["user_id"] = verify_data["user_id"]
             return long_token
