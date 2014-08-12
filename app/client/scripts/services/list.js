@@ -1,5 +1,5 @@
 'use strict';
-/*global $:false */
+/*global $:false, moment:false */
 
 /**
  * This factory is used for initializing the list of events in the widget.
@@ -64,7 +64,7 @@ angular.module('fbCal').factory('list', function () {
       eventList[i] = {};
       eventList[i].id = eventData[i].id;
       eventList[i].title = eventData[i].name;
-      eventList[i].unixTime = new Date(eventData[i].start_time).getTime();
+      eventList[i].unixTime = moment(eventData[i].start_time)._d.getTime();
       eventList[i].time = formatTime(eventList[i].unixTime);
     }
     eventList.sort(compare);
@@ -96,7 +96,7 @@ angular.module('fbCal').factory('list', function () {
    * @return {String}      The event time formatted
    */
   var formatTime = function(time) {
-    var localTime = new Date(time);
+    var localTime = moment(time)._d;
     var timeString = localTime.toLocaleTimeString().replace(/:\d\d /, '').toLowerCase();
     var dateString = localTime.toLocaleDateString();
     var dayString = localTime.toString().replace(/ .+/, ', ');

@@ -1,5 +1,5 @@
 'use strict';
-/*global $:false */
+/*global $:false, moment:false */
 
 /**
  * This factory is used for initializing the calendar of events in the widget.
@@ -85,11 +85,11 @@ angular.module('fbCal').factory('desktopCalendar', function ($wix, $rootScope) {
       processedEvents[i].title = events[i].name;
       processedEvents[i].url = '#';
       //Deal with weird times and events with no end times
-      processedEvents[i].start = new Date(events[i].start_time).getTime();
+      processedEvents[i].start = moment(events[i].start_time)._d.getTime();
       if (events[i].end_time) {
-        processedEvents[i].end = new Date(events[i].end_time).getTime();
+        processedEvents[i].end = moment(events[i].end_time)._d.getTime();
       } else {
-        processedEvents[i].end = new Date(events[i].start_time).getTime();
+        processedEvents[i].end = moment(events[i].start_time)._d.getTime();
       }
       if (events[i].eventColor) {
         processedEvents[i].color = events[i].eventColor;

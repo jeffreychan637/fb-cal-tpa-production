@@ -40,7 +40,7 @@ angular.module('fbCal').factory('processor', function ($sanitize, $sce, messages
      *                             is only displayed for multi-day events.
      */
     var processTime = function(start_time, end_time) {
-      var startTime = new Date(start_time);
+      var startTime = moment(start_time)._d;
       var startHour = startTime.toLocaleTimeString().toLowerCase();
       startHour = startHour.replace(/:\d\d /, "");
       var startDateString = startTime.toLocaleDateString();
@@ -48,7 +48,7 @@ angular.module('fbCal').factory('processor', function ($sanitize, $sce, messages
       var shortTime;
       var longTime;
       if (end_time) {
-        var endTime = new Date(end_time);
+        var endTime = moment(end_time)._d;
         var endHour = endTime.toLocaleTimeString().toLowerCase();
         endHour = endHour.replace(/:\d\d /, "");
         if (isSameDay(startTime, endTime)) {
@@ -179,7 +179,7 @@ angular.module('fbCal').factory('processor', function ($sanitize, $sce, messages
      * @return {Object}        Processed status object
      */
     var processActions = function(status, data) {
-      var postTime = new Date(data.created_time);
+      var postTime = moment(data.created_time)._d;
       status.time = postCreatedTime(postTime);
       status.message = $sanitize(data.message.replace(/\r?\n/g, "<br>"));
       $sce.trustAsHtml(status.message);
@@ -270,7 +270,7 @@ angular.module('fbCal').factory('processor', function ($sanitize, $sce, messages
                      can_remove : data.can_remove,
                      numberLikes : data.like_count,
                      name: data.from.name,
-                     time: postCreatedTime(new Date(data.created_time))
+                     time: postCreatedTime(moment(data.created_time)._d)
                     };
       if (data.message) {
         comment.message = $sanitize(data.message.replace(/\r?\n/g, "<br>"));
