@@ -168,18 +168,18 @@ def validate_get_request(request, request_from):
         instance = request.headers["X-Wix-Instance"]
         instance_json = instance_parser(instance)
         if not instance_json:
-            abort(STATUS["Forbidden"], message="Invalid Instance")
+            abort(STATUS["Forbidden"], message="1Invalid Instance")
         else:
             try:
                 instance = instance_json["instanceId"]
             except KeyError:
-                abort(STATUS["Forbidden"], message="Invalid Instance")
+                abort(STATUS["Forbidden"], message="2Invalid Instance")
         if request_from == "settings":
             try:
                 if (instance_json["permissions"] != "OWNER"):
-                    abort(STATUS["Forbidden"], message="Invalid Instance")
+                    abort(STATUS["Forbidden"], message="3Invalid Instance")
             except KeyError:
-                abort(STATUS["Forbidden"], message="Invalid Instance")
+                abort(STATUS["Forbidden"], message="4Invalid Instance")
             window = request.headers["URL"]
             if window != "editor.wix.com":
                 abort(STATUS["Forbidden"], message="Not Inside Editor")
