@@ -35,9 +35,9 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
    * @type {Object}
    */
   var defaultSettingsWidget = {settings : api.defaults,
-                               fb_event_data : [], active : true};
+                               fb_event_data : [], active : false};
   var defaultSettingsSettings = {settings : api.defaults, events : [],
-                                 active : true, name: "", user_id: ""};
+                                 active : false, name: "", user_id: ""};
 
   /**
    * Returns the appropriate URL based on the type of request and who is
@@ -158,7 +158,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
     $http({
            method: 'GET',
            url: getAllEventsURL,
-           headers: getHeader('settings'),
+           headers: {'X-Wix-Instance' : instance},
            timeout: 15000
           }).success(function (data, status) {
             if (status === 200) {
