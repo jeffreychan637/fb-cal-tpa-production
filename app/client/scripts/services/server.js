@@ -17,6 +17,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
   var compId = $wix.Utils.getOrigCompId() || $wix.Utils.getCompId();
   var instance = api.getInstance();
   var url = $window.location.hostname;
+  console.log(url);
 
   /**
    * All the URLs for communicating with the Server.
@@ -155,6 +156,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
               deferred.reject(getDefault(from));
             }
           }).error(function (message, status) {
+            console.debug(status, message);
             deferred.reject(getDefault(from));
           });
     return deferred.promise;
@@ -218,6 +220,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
               deferred.reject();
             }
           }).error(function (message, status) {
+            console.debug(status, message);
             deferred.reject();
           });
     return deferred.promise;
@@ -280,6 +283,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
               deferred.reject();
             }
           }).error(function (message, status) {
+            console.debug(status, message);
             deferred.reject();
           });
     return deferred.promise;
@@ -307,6 +311,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
               deferred.resolve();
             }
           }).error(function (message, status) {
+            console.debug(status, message);
             deferred.reject();
           });
       return deferred.promise;
