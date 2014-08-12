@@ -25,6 +25,7 @@ if "HEROKU" not in environ:
 
 """This starts the Flask server"""
 if "HEROKU" in environ:
-    flask_app.run()
+    port = int(environ.get('PORT', 5000))
+    flask_app.run(host='0.0.0.0', port=port)
 else:
     flask_app.run(debug=True, extra_files=extra_files)

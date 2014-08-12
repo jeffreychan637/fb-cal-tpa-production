@@ -21,7 +21,8 @@ class MyFlask(Flask):
         return Flask.get_send_file_max_age(self, name)
 
 if "HEROKU" in environ:
-    flask_app = Flask(__name__)
+    flask_app = Flask(__name__, static_folder="client", 
+                                template_folder="client")
 else:
     flask_app = MyFlask(__name__, static_folder="client", 
                                   template_folder="client")
