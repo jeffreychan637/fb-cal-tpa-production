@@ -232,6 +232,14 @@ textarea {
   outline: none !important;
 }
 
+.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
+  margin-right: 0;
+}
+
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+  margin-left: 0;
+}
+
 .load-feed {
   margin: 0;
 }

@@ -30,10 +30,8 @@ if "HEROKU" in environ:
                                               host=DATABASE["host"],
                                               port=DATABASE["port"])
     db.get_conn().set_client_encoding('UTF8')
-    print db
 else:
     db = MySQLDatabase("fbCalDB", user="root")
-
 
 class BaseModel(Model):
     """This is the base model that all tables in the database will follow. It
