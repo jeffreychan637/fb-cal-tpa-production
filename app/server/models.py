@@ -45,7 +45,7 @@ class Users(BaseModel):
     """Users is the main - and right now only - table in the DB. It stores the
     information of each app in use. 
 
-    The columns of Users are Wix coponent ID, Wix instance ID, user settings,
+    The columns of Users are Wix component ID, Wix instance ID, user settings,
     events saved by the user to be placed on their list or calendar, and their
     long term Facebook access token data.
 
