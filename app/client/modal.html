@@ -15,9 +15,6 @@
     <link rel="stylesheet" href="../../client/styles/icons.css">
     <link rel="stylesheet" href="../../client/styles/modal.css">
     <!-- endbuild -->
-    <!-- {% raw %} tell Flask to not mess with the Wix style variables when
-          rendering the modal.
-      -->
     {% raw %}
     <style wix-style>
       .loading {
@@ -167,7 +164,7 @@
     <script src="../../client/scripts/app.js"></script>
     
     <!-- This is necessary to pass event ID from server into modal, so the modal
-         knows what event to ask the server for later. event_id is a python 
+         knows what event to ask the server for later. event_id is a python
          variable for Flask to fill in when rendering the modal rather than an
          Angular JS variable.
       -->
