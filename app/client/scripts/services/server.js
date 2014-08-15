@@ -16,7 +16,7 @@ angular.module('fbCal').factory('server', function ($log, $http, $wix, api,
    */
   var compId = $wix.Utils.getOrigCompId() || $wix.Utils.getCompId();
   var instance = api.getInstance();
-  console.log(document.documentElement.clientWidth, window.innerWidth);
+
   /**
    * All the URLs for communicating with the Server.
    * @type {String}
